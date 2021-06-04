@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-   View, Text, TextInput, StyleSheet,
+   View, Text, TextInput, StyleSheet, TouchableOpacity,
 } from 'react-native';
 
 import AppBer from '../components/AppBer';
@@ -17,7 +17,9 @@ export default function LogInScreen() {
         <Button label="Submit" />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registerd?</Text>
-          <Text style={styles.footerLink}>Log In.</Text>
+          <TouchableOpacity>
+            <Text style={styles.footerLink}>Log In.</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
