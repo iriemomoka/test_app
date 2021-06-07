@@ -4,59 +4,44 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import {
+  shape, string, instanceOf, arrayOf,
+  } from 'prop-types';
 
-export default function MemoList() {
+export default function MemoList(props) {
+  const { memos } = props;
   const navigation = useNavigation();
   return (
     <View>
-      <TouchableOpacity
-        style={styles.memoListItem}
-        onPress={() => { navigation.navigate('MemoDetail'); }}
-      >
-        <View>
-          <Text style={styles.memoListItemTitle}>買い物リスト</Text>
-          <Text style={styles.memoListItemDate}>2020年12月25日 10:00</Text>
-        </View>
+      {memos.map((memo) => (
         <TouchableOpacity
-          style={styles.memoDelete}
-          onPress={() => { Alert.alert('OK'); }}
+          key={memo.id}
+          style={styles.memoListItem}
+          onPress={() => { navigation.navigate('MemoDetail'); }}
         >
-          <Feather name="x" size={16} color="#b0b0b0" />
+          <View>
+            <Text style={styles.memoListItemTitle}>{memo.bodyText}</Text>
+            <Text style={styles.memoListItemDate}>{String(memo.updatedAt)}</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.memoDelete}
+            onPress={() => { Alert.alert('OK'); }}
+          >
+            <Feather name="x" size={16} color="#b0b0b0" />
+          </TouchableOpacity>
         </TouchableOpacity>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.memoListItem}
-        onPress={() => { navigation.navigate('MemoDetail'); }}
-      >
-        <View>
-          <Text style={styles.memoListItemTitle}>買い物リスト</Text>
-          <Text style={styles.memoListItemDate}>2020年12月25日 10:00</Text>
-        </View>
-        <TouchableOpacity
-          style={styles.memoDelete}
-          onPress={() => { Alert.alert('ヴィエ！'); }}
-        >
-          <Feather name="x" size={16} color="#b0b0b0" />
-        </TouchableOpacity>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.memoListItem}
-        onPress={() => { navigation.navigate('MemoDetail'); }}
-      >
-        <View>
-          <Text style={styles.memoListItemTitle}>買い物リスト</Text>
-          <Text style={styles.memoListItemDate}>2020年12月25日 10:00</Text>
-        </View>
-        <TouchableOpacity
-          style={styles.memoDelete}
-          onPress={() => { Alert.alert('ヴィエ！'); }}
-        >
-          <Feather name="x" size={16} color="#b0b0b0" />
-        </TouchableOpacity>
-      </TouchableOpacity>
+      ))}
     </View>
   );
 }
+
+MemoList.propTypes = {
+  memos: arrayOf(shape({
+    id: string,
+    bodyText: string,
+    updatedAt: instanceOf(Date),
+  })).isRequired,
+};
 
 const styles = StyleSheet.create({
   memoListItem: {
