@@ -19,7 +19,7 @@ export default function MemoList() {
         </View>
         <TouchableOpacity
           style={styles.memoDelete}
-          onPress={() => { Alert.alert('ヴィエ！'); }}
+          onPress={() => { Alert.alert('OK'); }}
         >
           <Feather name="x" size={16} color="#b0b0b0" />
         </TouchableOpacity>
