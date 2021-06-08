@@ -5,7 +5,7 @@ import {
 import firebase from 'firebase';
 
 import Button from '../components/Button';
-import Loading from '../components/Loadeing';
+import Loading from '../components/Loading';
 
 export default function LogInScreen(props) {
   const { navigation } = props;
