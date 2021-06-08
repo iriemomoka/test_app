@@ -15,9 +15,7 @@ export default function SignUpScreen(props) {
   function handlePress() {
     firebase.auth().createUserWithEmailAndPassword(email, password)
        // 成功
-      .then((userCredential) => {
-        const { user } = userCredential;
-        console.log(user.uid);
+      .then(() => {
         navigation.reset({
           index: 0,
           routes: [{ name: 'MemoList' }],
@@ -25,7 +23,6 @@ export default function SignUpScreen(props) {
       })
       // 失敗
       .catch((error) => {
-        console.log(error.code, error.message);
         const errorMsg = translateErrors(error.code);
         Alert.alert(errorMsg.title, errorMsg.description);
       });
